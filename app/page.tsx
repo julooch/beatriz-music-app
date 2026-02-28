@@ -179,6 +179,11 @@ export default function Home() {
                     <div className="flex items-center gap-2 font-bold text-lg text-foreground mb-4">
                         <Mic2 className="h-6 w-6 text-primary" /> Beatriz Faina
                     </div>
+                    <div className="flex items-center gap-4 text-sm">
+                        <Link href="/privacidade" className="hover:text-primary transition-colors">
+                            Política de Privacidade
+                        </Link>
+                    </div>
                     <p>© {new Date().getFullYear()} Beatriz Faina Studio de Música.</p>
                 </div>
             </footer>

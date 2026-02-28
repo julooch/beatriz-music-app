@@ -76,3 +76,18 @@ model EventLog {
   metadata  Json? // Any extra data (e.g. step reached)
   createdAt DateTime @default(now())
 }
+
+model DataDeletionRequest {
+  id        String   @id @default(uuid())
+  email     String
+  name      String?
+  reason    String?
+  status    DeletionStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum DeletionStatus {
+  PENDING
+  COMPLETED
+}

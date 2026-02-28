@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from "next/server"
 import { PrismaClient } from "@prisma/client"
+import { rateLimit } from "@/lib/rateLimit"
 
 const prisma = new PrismaClient()
 
 export async function POST(req: NextRequest) {
     try {
+        const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown"
+        if (!rateLimit(ip, 10, 60000)) {
+            return NextResponse.json({ error: "Muitas solicitações. Tente novamente em 1 minuto." }, { status: 429 })
+        }
+
         const data = await req.json()
         const { action, payload } = data
 

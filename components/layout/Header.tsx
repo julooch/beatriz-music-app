@@ -14,6 +14,10 @@ export default function Header() {
         // Do not track clicks if viewing from the admin restricted area
         if (pathname?.startsWith("/admin")) return;
 
+        // Respect user consent
+        const consent = typeof window !== "undefined" ? localStorage.getItem("bf_consent") : null;
+        if (consent !== "accepted") return;
+
         const sessionId = typeof window !== "undefined" ? localStorage.getItem("bf_session_id") : null;
         if (!sessionId) return;
 

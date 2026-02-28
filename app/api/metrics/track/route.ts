@@ -1,10 +1,16 @@
 import { NextResponse } from "next/server"
 import { PrismaClient } from "@prisma/client"
+import { rateLimit } from "@/lib/rateLimit"
 
 const prisma = new PrismaClient()
 
 export async function POST(req: Request) {
     try {
+        const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown"
+        if (!rateLimit(ip, 30, 60000)) {
+            return NextResponse.json({ error: "Too many requests" }, { status: 429 })
+        }
+
         const body = await req.json()
         const { eventType, sessionId, duration } = body
 

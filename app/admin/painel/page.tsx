@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import Header from "@/components/layout/Header"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import { LogOut, Info, AlertCircle, Users, Calendar, MessageCircle, BarChart, Check, X } from "lucide-react"
+import { LogOut, Info, AlertCircle, Users, Calendar, MessageCircle, BarChart, Check, X, Shield, Trash2 } from "lucide-react"
 import { logoutAction } from "@/app/actions/auth"
 import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
 import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from "recharts"
@@ -15,6 +15,9 @@ export default function AdminDashboard() {
     const [schedules, setSchedules] = useState<any[]>([])
     const [metrics, setMetrics] = useState<any>(null)
     const [loading, setLoading] = useState(true)
+    const [deletionRequests, setDeletionRequests] = useState<any[]>([])
+    const [pendingDeletions, setPendingDeletions] = useState(0)
+    const [processingDeletion, setProcessingDeletion] = useState<string | null>(null)
 
     // Date Filters
     const now = new Date()
@@ -31,18 +34,20 @@ export default function AdminDashboard() {
             if (startDate) queryParams.append("startDate", startDate)
             if (endDate) queryParams.append("endDate", endDate)
 
-            const [schedRes, metricsRes] = await Promise.all([
+            const [schedRes, metricsRes, deletionRes] = await Promise.all([
                 fetch(`/api/admin`),
-                fetch(`/api/admin/metrics?${queryParams.toString()}`)
+                fetch(`/api/admin/metrics?${queryParams.toString()}`),
+                fetch(`/api/admin/data-requests`)
             ])
 
             const schedData = await schedRes.json()
             const metricsData = await metricsRes.json()
+            const deletionData = await deletionRes.json()
 
-            // Filter schedules locally based on start date too if desired, 
-            // but usually /api/admin is raw logic without dates. Let's keep /api/admin as "all pending schedules".
             setSchedules(schedData.schedules || [])
             setMetrics(metricsData.metrics)
+            setDeletionRequests(deletionData.requests || [])
+            setPendingDeletions(deletionData.pendingCount || 0)
         } catch (err) {
             console.error("Failed to load admin data", err)
         } finally {
@@ -65,6 +70,23 @@ export default function AdminDashboard() {
             fetchData() // refresh lists
         } catch (err) {
             alert("Erro ao atualizar status.")
+        }
+    }
+
+    const handleDeleteUserData = async (requestId: string) => {
+        if (!confirm("Tem certeza que deseja excluir todos os dados deste usuário? Esta ação é irreversível.")) return;
+        setProcessingDeletion(requestId)
+        try {
+            await fetch("/api/admin/data-requests", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ requestId })
+            })
+            fetchData()
+        } catch (err) {
+            alert("Erro ao processar exclusão de dados.")
+        } finally {
+            setProcessingDeletion(null)
         }
     }
 
@@ -147,7 +169,7 @@ export default function AdminDashboard() {
                 <motion.div
                     initial={{ y: -50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    className="container mx-auto px-4 -mt-4 mb-8 relative z-10"
+                    className="container mx-auto px-4 -mt-4 mb-4 relative z-10"
                 >
                     <div className="bg-orange-500 text-white p-4 rounded-xl shadow-lg border border-orange-600 flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -158,6 +180,28 @@ export default function AdminDashboard() {
                             window.scrollBy({ top: 800, behavior: 'smooth' });
                         }}>
                             Revisar agora
+                        </Button>
+                    </div>
+                </motion.div>
+            )}
+
+            {/* Snackbar for Pending Data Deletion Requests */}
+            {pendingDeletions > 0 && (
+                <motion.div
+                    initial={{ y: -50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="container mx-auto px-4 mb-8 relative z-10"
+                >
+                    <div className="bg-red-600 text-white p-4 rounded-xl shadow-lg border border-red-700 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <Shield className="h-6 w-6" />
+                            <p className="font-bold text-lg">Você tem {pendingDeletions} solicitação{pendingDeletions > 1 ? "ões" : ""} de exclusão de dados (LGPD)</p>
+                        </div>
+                        <Button variant="secondary" size="sm" className="bg-white text-red-600 hover:bg-red-50" onClick={() => {
+                            document.getElementById('lgpd-section')?.scrollIntoView({ behavior: 'smooth' });
+                        }}>
+                            Gerenciar
                         </Button>
                     </div>
                 </motion.div>
@@ -345,6 +389,59 @@ export default function AdminDashboard() {
                                         >
                                             <MessageCircle className="mr-2 h-4 w-4" /> Bate-papo (WhatsApp)
                                         </Button>
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </section>
+
+                {/* LGPD Data Deletion Section */}
+                <section id="lgpd-section">
+                    <div className="flex items-center gap-2 mb-6">
+                        <Shield className="h-6 w-6 text-red-600" />
+                        <h2 className="text-2xl font-bold">Exclusão de Dados (LGPD)</h2>
+                    </div>
+
+                    <div className="bg-background rounded-xl border shadow-sm divide-y">
+                        {deletionRequests.length === 0 ? (
+                            <div className="p-12 text-center text-muted-foreground">
+                                Nenhuma solicitação de exclusão de dados recebida.
+                            </div>
+                        ) : (
+                            deletionRequests.map((request: any) => (
+                                <div key={request.id} className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-muted/5 transition-colors">
+                                    <div className="flex-1 space-y-1">
+                                        <div className="flex items-center gap-3">
+                                            <h3 className="text-lg font-bold">{request.email}</h3>
+                                            <span className={`px-2 py-0.5 rounded-full text-xs font-semibold
+                                                ${request.status === 'PENDING' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}
+                                            `}>
+                                                {request.status === 'PENDING' ? 'Pendente' : 'Concluído'}
+                                            </span>
+                                        </div>
+                                        {request.name && (
+                                            <p className="text-sm text-muted-foreground">Nome: {request.name}</p>
+                                        )}
+                                        {request.reason && (
+                                            <p className="text-sm text-muted-foreground">Motivo: {request.reason}</p>
+                                        )}
+                                        <p className="text-xs text-muted-foreground mt-1">
+                                            Solicitado em: {format(new Date(request.createdAt), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}
+                                        </p>
+                                    </div>
+
+                                    <div className="shrink-0">
+                                        {request.status === 'PENDING' && (
+                                            <Button
+                                                onClick={() => handleDeleteUserData(request.id)}
+                                                disabled={processingDeletion === request.id}
+                                                className="bg-red-600 hover:bg-red-700 font-bold text-white"
+                                            >
+                                                <Trash2 className="mr-2 h-4 w-4" />
+                                                {processingDeletion === request.id ? 'Excluindo...' : 'Excluir Dados'}
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             ))

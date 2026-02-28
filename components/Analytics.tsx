@@ -7,6 +7,10 @@ export default function Analytics() {
         // Run only on client
         if (typeof window === "undefined") return;
 
+        // Respect user consent
+        const consent = localStorage.getItem("bf_consent")
+        if (consent !== "accepted") return;
+
         const sessionId = localStorage.getItem("bf_session_id") || crypto.randomUUID();
         localStorage.setItem("bf_session_id", sessionId);
 

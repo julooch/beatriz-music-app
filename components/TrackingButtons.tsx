@@ -5,7 +5,11 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
 function trackClick(eventName: string) {
-    const sessionId = typeof window !== "undefined" ? localStorage.getItem("bf_session_id") : null;
+    if (typeof window === "undefined") return;
+    const consent = localStorage.getItem("bf_consent")
+    if (consent !== "accepted") return;
+
+    const sessionId = localStorage.getItem("bf_session_id");
     if (!sessionId) return;
 
     fetch("/api/metrics/track", {
