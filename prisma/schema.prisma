@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  role      Role     @default(STUDENT) // 'ADMIN' for Beatriz, 'STUDENT' for others
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  schedules Schedule[]
+}
+
+enum Role {
+  ADMIN
+  STUDENT
+}
+
+model Lead {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  phone     String?
+  source    String?  @default("landing_page") // From where they subscribed
+  createdAt DateTime @default(now())
+}
+
+model Schedule {
+  id        String   @id @default(uuid())
+  userId    String? // References a registered student (can be null if booked as guest first)
+  user      User?    @relation(fields: [userId], references: [id])
+  date      DateTime
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  details ScheduleDetails? // One-to-one relation for the pre-questions
+}
+
+enum Status {
+  PENDING
+  CONFIRMED
+  REJECTED
+  COMPLETED
+}
+
+model ScheduleDetails {
+  id          String   @id @default(uuid())
+  scheduleId  String   @unique
+  schedule    Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  isBeginner  Boolean
+  goal        String
+  improvement String
+  createdAt   DateTime @default(now())
+}
+
+model EventLog {
+  id        String   @id @default(uuid())
+  eventType String // e.g., "STARTED_SCHEDULING", "COMPLETED_SCHEDULING", "ABANDONED_SCHEDULING"
+  sessionId String? // To track anonymous users in the funnel
+  userId    String? // If authenticated
+  metadata  Json? // Any extra data (e.g. step reached)
+  createdAt DateTime @default(now())
+}
