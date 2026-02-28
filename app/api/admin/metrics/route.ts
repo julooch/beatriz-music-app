@@ -14,8 +14,8 @@ export async function GET(req: Request) {
         if (startDateParam && endDateParam) {
             dateFilter = {
                 createdAt: {
-                    gte: new Date(startDateParam),
-                    lte: new Date(endDateParam + "T23:59:59.999Z") // end of the day
+                    gte: new Date(startDateParam + "T00:00:00"),
+                    lte: new Date(endDateParam + "T23:59:59.999")
                 }
             };
         }
@@ -47,7 +47,7 @@ export async function GET(req: Request) {
         const totalLeads = await prisma.lead.count({ where: dateFilter })
         const totalCompleted = await prisma.eventLog.count({ where: { eventType: "COMPLETED_SCHEDULING", ...dateFilter } })
 
-        const pendingSchedules = await prisma.schedule.count({ where: { status: "PENDING", ...dateFilter } })
+        const pendingSchedules = await prisma.schedule.count({ where: { status: "PENDING" } })
         const confirmedSchedules = await prisma.schedule.count({ where: { status: "CONFIRMED", ...dateFilter } })
         const rejectedSchedules = await prisma.schedule.count({ where: { status: "REJECTED", ...dateFilter } })
 

@@ -74,10 +74,9 @@ export default function AdminDashboard() {
         window.open(url, "_blank")
     }
 
-    const AnimatedNumber = ({ value }: { value: number }) => {
+    const AnimatedNumber = ({ value, animKey }: { value: number, animKey?: string }) => {
         const count = useMotionValue<number>(0)
         const rounded = useTransform(count, (latest) => {
-            // Check if it's a float by seeing if modulo 1 is not zero, but since our raw percentages are passed as strings we parsed, let's format based on if it's an integer
             if (value % 1 !== 0) {
                 return parseFloat(latest.toFixed(1))
             }
@@ -85,12 +84,15 @@ export default function AdminDashboard() {
         })
 
         useEffect(() => {
+            count.set(0)
             const controls = animate(count, value, { duration: 1.5, ease: "easeOut" })
             return controls.stop
-        }, [value, count])
+        }, [value, count, animKey])
 
         return <motion.span>{rounded}</motion.span>
     }
+
+    const animKey = `${startDate}-${endDate}`
 
     const MetricCard = ({ title, value, colorClass, tooltip, suffix = "" }: { title: string, value: string | number, colorClass: string, tooltip: string, suffix?: string }) => {
         const numValue = typeof value === 'number' ? value : parseFloat(value as string) || 0;
@@ -103,7 +105,7 @@ export default function AdminDashboard() {
                             <Info className="absolute top-3 right-3 h-4 w-4 text-muted-foreground opacity-50 hover:opacity-100 transition-opacity" />
                             <p className="text-sm text-muted-foreground font-medium mb-2">{title}</p>
                             <p className={`text-3xl font-bold ${colorClass} flex items-baseline gap-1`}>
-                                <AnimatedNumber value={numValue} />
+                                <AnimatedNumber value={numValue} animKey={animKey} />
                                 {suffix && <span className="text-lg">{suffix}</span>}
                             </p>
                         </div>
@@ -150,7 +152,7 @@ export default function AdminDashboard() {
                     <div className="bg-orange-500 text-white p-4 rounded-xl shadow-lg border border-orange-600 flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             <AlertCircle className="h-6 w-6" />
-                            <p className="font-bold text-lg">Você possui {metrics.pendingSchedules} agendamento{metrics.pendingSchedules > 1 ? "s" : ""} pendente{metrics.pendingSchedules > 1 ? "s" : ""} de aprovação.</p>
+                            <p className="font-bold text-lg">Você tem {metrics.pendingSchedules} agendamento{metrics.pendingSchedules > 1 ? "s" : ""} pendente{metrics.pendingSchedules > 1 ? "s" : ""}</p>
                         </div>
                         <Button variant="secondary" size="sm" className="bg-white text-orange-600 hover:bg-orange-50" onClick={() => {
                             window.scrollBy({ top: 800, behavior: 'smooth' });

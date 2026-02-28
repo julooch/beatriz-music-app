@@ -3,18 +3,9 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Mic2, Star, Users, CalendarHeart, ArrowRight, PlayCircle, Heart } from "lucide-react"
 import Analytics from "@/components/Analytics"
+import { HeroAgendarButton, CTAAgendarButton } from "@/components/TrackingButtons"
 
 export default function Home() {
-    const handleTrackClick = (eventName: string) => {
-        const sessionId = typeof window !== "undefined" ? localStorage.getItem("bf_session_id") : null;
-        if (!sessionId) return;
-
-        fetch("/api/metrics/track", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ eventType: eventName, sessionId })
-        }).catch(err => console.error(err));
-    }
 
     return (
         <div className="min-h-screen bg-background flex flex-col font-sans">
@@ -48,11 +39,7 @@ export default function Home() {
                                     Aulas particulares de canto e teoria musical adaptadas ao seu estilo. Uma jornada de expressão artística, saúde vocal e autoconfiança.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                                    <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all hover:-translate-y-1" asChild onClick={() => handleTrackClick("CLICK_AGENDAR")}>
-                                        <Link href="/agendamento">
-                                            Agendar Aula <ArrowRight className="ml-2 h-5 w-5" />
-                                        </Link>
-                                    </Button>
+                                    <HeroAgendarButton />
                                     <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full bg-white/50 backdrop-blur-sm hover:bg-white hover:text-primary transition-colors" asChild>
                                         <Link href="#metodologia">
                                             <PlayCircle className="mr-2 h-5 w-5" /> Conhecer o Método
@@ -181,9 +168,7 @@ export default function Home() {
                             <p className="text-white/90 text-xl font-medium leading-relaxed">
                                 Agende uma aula de avaliação para conversarmos sobre seus objetivos, avaliarmos seu nível atual e traçarmos um estúdio prático focado em resultados.
                             </p>
-                            <Button size="lg" className="h-16 px-12 text-xl font-bold rounded-full bg-white text-primary hover:bg-gray-100 shadow-xl transition-transform hover:scale-105" asChild onClick={() => handleTrackClick("CLICK_AGENDAR")}>
-                                <Link href="/agendamento">Marcar a minha primeira aula</Link>
-                            </Button>
+                            <CTAAgendarButton />
                         </div>
                     </div>
                 </section>
