@@ -63,7 +63,7 @@ export default function Home() {
                                 <div className="aspect-[4/5] rounded-[2.5rem] bg-gradient-to-tr from-primary/10 via-white to-secondary/10 shadow-2xl relative border-4 border-white mb-8 lg:mb-0">
                                     {/* Image representing the Music/Teacher */}
                                     <div className="absolute inset-0 overflow-hidden rounded-[2.2rem] group">
-                                        <img src="/hero.png" alt="Beatriz ensinando canto" className="w-full h-full object-cover object-top scale-[1.02] group-hover:scale-105 transition-transform duration-700" />
+                                        <img src="/profile.jpg" alt="Beatriz Faina - Cantora e Educadora Vocal" className="w-full h-full object-cover object-center scale-[1.02] group-hover:scale-105 transition-transform duration-700" />
                                     </div>
 
                                     {/* Floating elements */}
@@ -80,43 +80,129 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* Features / Benefits */}
+                {/* Sobre / Trajetória */}
+                <section id="sobre" className="py-24 bg-muted/30 relative">
+                    <div className="container mx-auto px-6">
+                        <div className="text-center mb-16 space-y-6">
+                            <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Sobre Mim</h2>
+                            <h3 className="text-4xl md:text-5xl font-extrabold text-foreground">Cantora, arranjadora vocal e educadora musical.</h3>
+                            <div className="max-w-3xl mx-auto space-y-4">
+                                <p className="text-muted-foreground text-xl leading-relaxed">
+                                    Apaixonada por investigar a potência do corpo-voz. Minha trajetória é pautada pelo encontro entre a 
+                                    técnica acadêmica e a sensibilidade da música popular brasileira.
+                                </p>
+                                <p className="text-muted-foreground text-lg leading-relaxed">
+                                    Com formação em Música e pós-graduação em Pedagogia Vocal pela Faculdade Santa Marcelina, 
+                                    dedico minha carreira a entender a voz não apenas como um instrumento, 
+                                    mas como uma forma de expressão profunda e autêntica.
+                                </p>
+                                <p className="text-muted-foreground text-lg leading-relaxed pt-2">
+                                    Atualmente, levo essa pesquisa para os palcos com o quarteto vocal Mansa Fúria 
+                                    e o Coral Harmonia, celebrando a força da música feminina e da afro-brasilidade.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Experiência Profissional Cards */}
+                        <div className="mt-20">
+                            <h4 className="text-3xl font-bold text-center mb-4 text-foreground">Minha caminhada musical</h4>
+                            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto text-lg">
+                                Inclui passagens por palcos importantes em São Paulo e outros estados, e colaborações em diversos projetos fonográficos e teatrais:
+                            </p>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {[
+                                    {
+                                        icon: Star,
+                                        title: "Palcos Institucionais",
+                                        desc: "Como integrante do Coral Jovem do Estado de São Paulo, apresentei-me em espaços como Sala São Paulo, Theatro São Pedro, MASP e Teatro B32.",
+                                        color: "bg-primary/10 text-primary border-primary/20",
+                                        hoverColor: "hover:border-primary/50 hover:shadow-md"
+                                    },
+                                    {
+                                        icon: Users,
+                                        title: "Trabalho de Coro",
+                                        desc: "Além do Coral Jovem, integrei o coro da turnê brasileira de Andrea Bocelli em 2024 e 2025.",
+                                        color: "bg-secondary/20 text-secondary-foreground border-secondary/30",
+                                        hoverColor: "hover:border-secondary/60 hover:shadow-md"
+                                    },
+                                    {
+                                        icon: Mic2,
+                                        title: "Colaborações e Trilhas",
+                                        desc: "Participei de álbuns e espetáculos como Fim de Feira, Menino Brasil, Jamais Vai Derrubar, e na trilha de Eu Não Sou Só Isso.",
+                                        color: "bg-accent/10 text-accent border-accent/20",
+                                        hoverColor: "hover:border-accent/50 hover:shadow-md"
+                                    },
+                                    {
+                                        icon: Heart,
+                                        title: "Arte e Educação",
+                                        desc: "Realizei oficinas em espaços como CEU Arthur Alvim, e sou educadora musical no projeto Musicou (Sustenidos).",
+                                        color: "bg-[#A2A183]/20 text-[#686230] border-[#A2A183]/30",
+                                        hoverColor: "hover:border-[#A2A183]/60 hover:shadow-md"
+                                    }
+                                ].map((exp, i) => (
+                                    <div key={i} className={`bg-background p-8 rounded-[1.5rem] shadow-sm border ${exp.color.split(' ')[2] || 'border-border/50'} ${exp.hoverColor} transition-all duration-300 flex flex-col h-full group`}>
+                                        <div className={`h-14 w-14 ${exp.color.split(' ').slice(0, 2).join(' ')} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                                            <exp.icon className="h-7 w-7" />
+                                        </div>
+                                        <h5 className="font-bold text-xl mb-3 text-foreground">{exp.title}</h5>
+                                        <p className="text-muted-foreground flex-1 leading-relaxed">
+                                            {exp.desc}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Features / Metodologia */}
                 <section id="metodologia" className="py-24 bg-white relative">
                     <div className="container mx-auto px-6">
                         <div className="text-center mb-20 space-y-6">
-                            <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Metodologia Exclusiva</h2>
-                            <h3 className="text-4xl md:text-5xl font-extrabold text-foreground">A sua voz no centro de tudo.</h3>
+                            <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Metodologia</h2>
+                            <h3 className="text-4xl md:text-5xl font-extrabold text-foreground">Como são as aulas?</h3>
                             <p className="text-muted-foreground max-w-2xl mx-auto text-xl">
-                                Um método híbrido que integra técnica apurada e sensibilidade artística para resultados impressionantes em qualquer estilo.
+                                Minha metodologia propõe a criação musical a partir da consciência corporal. As aulas são pensadas para quem busca:
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-10">
+                        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                             {[
                                 {
                                     icon: Star,
-                                    title: "Fisiologia Vocal",
-                                    desc: "Entenda o seu instrumento. Respiração, apoio e ressonância para cantar sem esforço e com longevidade.",
-                                    color: "bg-blue-50 text-blue-600"
+                                    title: "Pedagogia Vocal",
+                                    desc: "Técnica com embasamento para o uso saudável e eficiente da voz.",
+                                    color: "bg-primary/10 text-primary border-primary/20",
+                                    hoverColor: "hover:border-primary/50"
                                 },
                                 {
                                     icon: Users,
-                                    title: "Reportório Guiado",
-                                    desc: "Suas músicas favoritas como objeto de estudo! A prática focada naquilo que você genuinamente ama cantar.",
-                                    color: "bg-purple-50 text-primary"
+                                    title: "Corpo-Voz",
+                                    desc: "Explorar o corpo como o suporte principal da musicalidade.",
+                                    color: "bg-secondary/20 text-secondary-foreground border-secondary/30",
+                                    hoverColor: "hover:border-secondary/60"
                                 },
                                 {
-                                    icon: CalendarHeart,
-                                    title: "Rotina Flexível",
-                                    desc: "Não há pressão. Adaptamos a frequência das aulas à sua rotina para que o aprendizado seja prazeroso, não um fardo.",
-                                    color: "bg-pink-50 text-secondary"
+                                    icon: Heart,
+                                    title: "Identidade e Repertório",
+                                    desc: "Desenvolvimento da interpretação dentro da música popular, respeitando o estilo de cada aluno.",
+                                    color: "bg-accent/10 text-accent border-accent/20",
+                                    hoverColor: "hover:border-accent/50"
+                                },
+                                {
+                                    icon: PlayCircle,
+                                    title: "Autonomia Musical",
+                                    desc: "Noções de percepção e exercícios musicais para uma vivência artística completa.",
+                                    color: "bg-[#A2A183]/20 text-[#686230] border-[#A2A183]/30",
+                                    hoverColor: "hover:border-[#A2A183]/60"
                                 }
                             ].map((feature, i) => (
-                                <div key={i} className="bg-background p-10 rounded-[2rem] border border-muted shadow-sm hover:shadow-2xl transition-all hover:-translate-y-2 group">
-                                    <div className={`h-16 w-16 ${feature.color} rounded-2xl flex items-center justify-center mb-8 rotate-3 group-hover:rotate-0 transition-transform shadow-sm`}>
+                                <div key={i} className={`bg-background p-10 rounded-[2rem] border ${feature.color.split(' ')[2] || 'border-muted'} shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 ${feature.hoverColor} group`}>
+                                    <div className={`h-16 w-16 ${feature.color.split(' ').slice(0, 2).join(' ')} rounded-2xl flex items-center justify-center mb-8 rotate-3 group-hover:rotate-0 transition-transform shadow-sm`}>
                                         <feature.icon className="h-8 w-8" />
                                     </div>
-                                    <h4 className="text-2xl font-bold mb-4">{feature.title}</h4>
+                                    <h4 className="text-2xl font-bold mb-4 text-foreground">{feature.title}</h4>
                                     <p className="text-muted-foreground leading-relaxed text-lg">
                                         {feature.desc}
                                     </p>
