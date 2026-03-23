@@ -239,59 +239,59 @@ export default function AdminDashboard() {
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                                 <MetricCard
                                     title="Visitas no Site"
-                                    value={metrics?.siteViews || 0} colorClass="text-zinc-800"
+                                    value={metrics?.siteViews || 0} colorClass="text-foreground"
                                     tooltip="Número total de visitantes únicos que abriram a página principal do seu site no navegador."
                                 />
                                 <MetricCard
                                     title="Sessão Média"
-                                    value={metrics?.avgSessionMinutes || 0} suffix="min" colorClass="text-purple-600"
+                                    value={metrics?.avgSessionMinutes || 0} suffix="min" colorClass="text-primary"
                                     tooltip="Calcula quanto tempo em média (minutos) cada visitante gasta lendo e conhecendo sua metodologia."
                                 />
                                 <MetricCard
                                     title="Leads Capturados"
-                                    value={metrics?.totalLeads || 0} colorClass="text-zinc-800"
+                                    value={metrics?.totalLeads || 0} colorClass="text-foreground"
                                     tooltip="Número de e-mails contatáveis coletados (pessoas que iniciaram o formulário)."
                                 />
                                 <MetricCard
                                     title="Tentaram Agendar"
-                                    value={metrics?.totalVisits || 0} colorClass="text-blue-600"
+                                    value={metrics?.totalVisits || 0} colorClass="text-primary"
                                     tooltip="Número de pessoas que de fato clicaram em 'Agendar Aula' e abriram o formulário de etapas."
                                 />
                                 <MetricCard
                                     title="Aulas Solicitadas"
-                                    value={metrics?.totalCompleted || 0} colorClass="text-green-600"
+                                    value={metrics?.totalCompleted || 0} colorClass="text-accent"
                                     tooltip="A quantidade final de interessados que chegaram até o fim das perguntas e submeteram a solicitação para avaliação."
                                 />
                                 <MetricCard
                                     title="Agendamentos Cancelados"
-                                    value={metrics?.rejectedSchedules || 0} colorClass="text-red-500"
+                                    value={metrics?.rejectedSchedules || 0} colorClass="text-destructive"
                                     tooltip="Quantidade de vezes que você recusou ou bloqueou solicitações de agendamento na plataforma."
                                 />
                                 <MetricCard
                                     title="Taxa de Abandono (Site)"
-                                    value={metrics?.abandonmentRate || 0} suffix="%" colorClass="text-orange-500"
+                                    value={metrics?.abandonmentRate || 0} suffix="%" colorClass="text-accent"
                                     tooltip="A porcentagem de pessoas em que o marketing deu certo (visitaram a página principal) mas não se converteram em nenhuma aula solicitada."
                                 />
 
                                 {/* New Tracking Metrics */}
                                 <MetricCard
                                     title="Cliques em 'Sobre'"
-                                    value={metrics?.clicksSobre || 0} colorClass="text-indigo-500"
+                                    value={metrics?.clicksSobre || 0} colorClass="text-[#686230]"
                                     tooltip="Número de vezes que visitantes clicaram para ler sobre a sua trajetória e currículo."
                                 />
                                 <MetricCard
                                     title="Cliques 'Metodologia'"
-                                    value={metrics?.clicksMetodologia || 0} colorClass="text-indigo-500"
+                                    value={metrics?.clicksMetodologia || 0} colorClass="text-[#A2A183]"
                                     tooltip="Número de interesses gerados sobre como funciona as suas aulas teóricas e práticas."
                                 />
                                 <MetricCard
                                     title="Cliques 'Depoimentos'"
-                                    value={metrics?.clicksDepoimentos || 0} colorClass="text-indigo-500"
+                                    value={metrics?.clicksDepoimentos || 0} colorClass="text-primary"
                                     tooltip="Quantidade de pessoas que buscaram prova social e referências lendo os depoimentos."
                                 />
                                 <MetricCard
                                     title="Botões de Agendar"
-                                    value={metrics?.clicksAgendar || 0} colorClass="text-indigo-600"
+                                    value={metrics?.clicksAgendar || 0} colorClass="text-accent"
                                     tooltip="A soma total de todos os cliques em botões de 'Agendar Aula' e CTAs espalhados pela landing page."
                                 />
                             </div>

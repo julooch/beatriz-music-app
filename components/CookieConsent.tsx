@@ -33,7 +33,7 @@ export default function CookieConsent() {
                         <p>
                             Utilizamos cookies e rastreamento anônimo para melhorar sua experiência.
                             Ao aceitar, você concorda com nossa{" "}
-                            <Link href="/privacidade" className="underline text-purple-400 hover:text-purple-300 font-medium">
+                            <Link href="/privacidade" className="underline text-primary hover:text-primary/80 font-medium">
                                 Política de Privacidade
                             </Link>.
                         </p>
@@ -47,7 +47,7 @@ export default function CookieConsent() {
                         </button>
                         <button
                             onClick={handleAccept}
-                            className="px-6 py-2 text-sm font-bold bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors shadow-lg"
+                            className="px-6 py-2 text-sm font-bold bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors shadow-lg"
                         >
                             Aceitar
                         </button>
