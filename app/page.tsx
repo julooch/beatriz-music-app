@@ -29,11 +29,8 @@ export default function Home() {
                                     </span>
                                     Vagas abertas para novos alunos!
                                 </div>
-                                <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tighter leading-tight text-foreground">
-                                    Desperte a potência <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                                        da sua voz
-                                    </span>
+                                <h1 className="text-6xl lg:text-8xl font-extrabold tracking-tighter leading-tight text-foreground">
+                                    Beatriz <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Faina</span>
                                 </h1>
                                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
                                     Aulas particulares de canto e teoria musical adaptadas ao seu estilo. Uma jornada de expressão artística, saúde vocal e autoconfiança.
