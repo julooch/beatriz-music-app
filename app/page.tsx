@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Mic2, Star, Users, CalendarHeart, ArrowRight, PlayCircle, Heart } from "lucide-react"
+import { Mic2, Star, Users, CalendarHeart, ArrowRight, PlayCircle, Heart, GraduationCap, Sparkles } from "lucide-react"
 import Analytics from "@/components/Analytics"
 import { HeroAgendarButton, CTAAgendarButton } from "@/components/TrackingButtons"
 
@@ -86,20 +86,42 @@ export default function Home() {
                         <div className="text-center mb-16 space-y-6">
                             <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Sobre Mim</h2>
                             <h3 className="text-4xl md:text-5xl font-extrabold text-foreground">Cantora, arranjadora vocal e educadora musical.</h3>
-                            <div className="max-w-3xl mx-auto space-y-4">
-                                <p className="text-muted-foreground text-xl leading-relaxed">
-                                    Apaixonada por investigar a potência do corpo-voz. Minha trajetória é pautada pelo encontro entre a 
-                                    técnica acadêmica e a sensibilidade da música popular brasileira.
-                                </p>
-                                <p className="text-muted-foreground text-lg leading-relaxed">
-                                    Com formação em Música e pós-graduação em Pedagogia Vocal pela Faculdade Santa Marcelina, 
-                                    dedico minha carreira a entender a voz não apenas como um instrumento, 
-                                    mas como uma forma de expressão profunda e autêntica.
-                                </p>
-                                <p className="text-muted-foreground text-lg leading-relaxed pt-2">
-                                    Atualmente, levo essa pesquisa para os palcos com o quarteto vocal Mansa Fúria 
-                                    e o Coral Harmonia, celebrando a força da música feminina e da afro-brasilidade.
-                                </p>
+                            <div className="max-w-3xl mx-auto mt-12 space-y-6 text-left">
+                                <div className="flex flex-col sm:flex-row gap-5 items-start bg-background p-6 lg:p-8 rounded-[2rem] shadow-sm border border-border/50 hover:shadow-md transition-shadow">
+                                    <div className="bg-primary/10 p-4 rounded-2xl text-primary shrink-0">
+                                        <Sparkles className="h-6 w-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-foreground text-xl mb-2">Abordagem e Pesquisa</h4>
+                                        <p className="text-muted-foreground leading-relaxed text-lg">
+                                            Apaixonada por investigar a potência do corpo-voz. Minha trajetória é pautada pelo encontro entre a técnica acadêmica e a sensibilidade da música popular brasileira.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row gap-5 items-start bg-background p-6 lg:p-8 rounded-[2rem] shadow-sm border border-border/50 hover:shadow-md transition-shadow">
+                                    <div className="bg-secondary/20 p-4 rounded-2xl text-secondary-foreground shrink-0">
+                                        <GraduationCap className="h-6 w-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-foreground text-xl mb-2">Formação Acadêmica</h4>
+                                        <p className="text-muted-foreground leading-relaxed text-lg">
+                                            Com formação em Música e pós-graduação em Pedagogia Vocal pela Faculdade Santa Marcelina, dedico minha carreira a entender a voz não apenas como um instrumento, mas como uma forma de expressão profunda e autêntica.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row gap-5 items-start bg-background p-6 lg:p-8 rounded-[2rem] shadow-sm border border-border/50 hover:shadow-md transition-shadow">
+                                    <div className="bg-accent/10 p-4 rounded-2xl text-accent shrink-0">
+                                        <Mic2 className="h-6 w-6" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-foreground text-xl mb-2">Atuação Artística</h4>
+                                        <p className="text-muted-foreground leading-relaxed text-lg">
+                                            Atualmente, levo essa pesquisa para os palcos com o quarteto vocal Mansa Fúria e o Coral Harmonia, celebrando a força da música feminina e da afro-brasilidade.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
