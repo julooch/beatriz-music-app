@@ -30,9 +30,9 @@ export default function Home() {
                                     Vagas abertas para novos alunos!
                                 </div>
                                 <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tighter leading-tight text-foreground">
-                                    Encontre a sua <br />
+                                    Desperte a potência <br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                                        voz verdadeira.
+                                        da sua voz
                                     </span>
                                 </h1>
                                 <p className="text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
@@ -85,7 +85,7 @@ export default function Home() {
                     <div className="container mx-auto px-6">
                         <div className="text-center mb-16 space-y-6">
                             <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Sobre Mim</h2>
-                            <h3 className="text-4xl md:text-5xl font-extrabold text-foreground">Cantora, arranjadora vocal e educadora musical.</h3>
+                            <h3 className="text-4xl md:text-5xl font-extrabold text-foreground">Cantora, arranjadora vocal e educadora musical</h3>
                             <div className="max-w-3xl mx-auto mt-12 space-y-6 text-left">
                                 <div className="flex flex-col sm:flex-row gap-5 items-start bg-background p-6 lg:p-8 rounded-[2rem] shadow-sm border border-border/50 hover:shadow-md transition-shadow">
                                     <div className="bg-primary/10 p-4 rounded-2xl text-primary shrink-0">
@@ -183,7 +183,7 @@ export default function Home() {
                     <div className="container mx-auto px-6">
                         <div className="text-center mb-16 space-y-4">
                             <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Meus Trabalhos</h2>
-                            <h3 className="text-3xl md:text-5xl font-extrabold text-foreground">Performances e Apresentações.</h3>
+                            <h3 className="text-3xl md:text-5xl font-extrabold text-foreground">Performances e Apresentações</h3>
                             <p className="text-muted-foreground max-w-2xl mx-auto text-xl">
                                 Um pouco da minha vivência prática nos palcos e em estúdio como cantora e arranjadora vocal.
                             </p>
@@ -263,7 +263,7 @@ export default function Home() {
                     <div className="container mx-auto px-6">
                         <div className="text-center mb-16 space-y-4">
                             <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Depoimentos</h2>
-                            <h3 className="text-3xl md:text-5xl font-extrabold text-foreground">O que dizem as vozes que treinei.</h3>
+                            <h3 className="text-3xl md:text-5xl font-extrabold text-foreground">O que dizem as vozes que treinei</h3>
                         </div>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {[
@@ -296,7 +296,7 @@ export default function Home() {
                     <div className="bg-gradient-to-r from-primary to-secondary text-white rounded-[3rem] p-10 md:p-20 text-center space-y-10 shadow-2xl relative overflow-hidden">
                         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                         <div className="relative z-10 max-w-3xl mx-auto space-y-8">
-                            <h2 className="text-4xl md:text-6xl font-extrabold">A hora de começar é agora.</h2>
+                            <h2 className="text-4xl md:text-6xl font-extrabold">A hora de começar é agora</h2>
                             <p className="text-white/90 text-xl font-medium leading-relaxed">
                                 Agende uma aula de avaliação para conversarmos sobre seus objetivos, avaliarmos seu nível atual e traçarmos um estúdio prático focado em resultados.
                             </p>
