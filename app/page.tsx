@@ -156,6 +156,30 @@ export default function Home() {
                     </div>
                 </section>
 
+                {/* Portfólio / Vídeos */}
+                <section id="portfolio" className="py-24 bg-background relative">
+                    <div className="container mx-auto px-6">
+                        <div className="text-center mb-16 space-y-4">
+                            <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Meus Trabalhos</h2>
+                            <h3 className="text-3xl md:text-5xl font-extrabold text-foreground">Performances e Apresentações.</h3>
+                            <p className="text-muted-foreground max-w-2xl mx-auto text-xl">
+                                Um pouco da minha vivência prática nos palcos e em estúdio como cantora e arranjadora vocal.
+                            </p>
+                        </div>
+                        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                            <div className="aspect-video rounded-3xl overflow-hidden shadow-xl border border-border hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
+                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/U8vUTZMOeYY" title="Mansa Fúria Video 1" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                            </div>
+                            <div className="aspect-video rounded-3xl overflow-hidden shadow-xl border border-border hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
+                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Oj5Nhu0mdBA" title="Mansa Fúria Video 2" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                            </div>
+                            <div className="aspect-video rounded-3xl overflow-hidden shadow-xl border border-border hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
+                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/nocXGOtsKcA" title="Mansa Fúria Video 3" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Features / Metodologia */}
                 <section id="metodologia" className="py-24 bg-white relative">
                     <div className="container mx-auto px-6">
