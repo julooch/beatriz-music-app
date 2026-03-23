@@ -63,7 +63,7 @@ export default function Home() {
                                 <div className="aspect-[4/5] rounded-[2.5rem] bg-gradient-to-tr from-primary/10 via-white to-secondary/10 shadow-2xl relative border-4 border-white mb-8 lg:mb-0">
                                     {/* Image representing the Music/Teacher */}
                                     <div className="absolute inset-0 overflow-hidden rounded-[2.2rem] group">
-                                        <img src="/profile.jpg" alt="Beatriz Faina - Cantora e Educadora Vocal" className="w-full h-full object-cover object-center scale-[1.02] group-hover:scale-105 transition-transform duration-700" />
+                                        <img src="/profile.png" alt="Beatriz Faina - Cantora e Educadora Vocal" className="w-full h-full object-cover object-center scale-[1.02] group-hover:scale-105 transition-transform duration-700" />
                                     </div>
 
                                     {/* Floating elements */}
