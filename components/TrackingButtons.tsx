@@ -36,13 +36,15 @@ export function HeroAgendarButton() {
 
 export function CTAAgendarButton() {
     return (
-        <Button
-            size="lg"
-            className="h-16 px-12 text-xl font-bold rounded-full bg-white text-primary hover:bg-gray-100 shadow-xl transition-transform hover:scale-105"
-            asChild
-            onClick={() => trackClick("CLICK_AGENDAR")}
-        >
-            <Link href="/agendamento">Marcar a minha primeira aula</Link>
-        </Button>
+        <div className="flex justify-center w-full">
+            <Button
+                size="lg"
+                className="h-auto min-h-[4rem] w-full sm:w-auto py-4 sm:py-0 px-6 sm:px-12 text-lg sm:text-xl font-bold rounded-full bg-white text-primary hover:bg-gray-100 shadow-xl transition-transform hover:scale-105 whitespace-normal text-center leading-tight"
+                asChild
+                onClick={() => trackClick("CLICK_AGENDAR")}
+            >
+                <Link href="/agendamento">Marcar a minha primeira aula</Link>
+            </Button>
+        </div>
     )
 }
