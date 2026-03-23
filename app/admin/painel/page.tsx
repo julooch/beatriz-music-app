@@ -297,23 +297,25 @@ export default function AdminDashboard() {
                             </div>
 
                             {/* Chart Area */}
-                            <div className="bg-background rounded-xl border p-6 shadow-sm h-[400px]">
+                            <div className="bg-background rounded-xl border p-6 shadow-sm h-[480px] flex flex-col">
                                 <h3 className="text-lg font-bold mb-6 text-center text-muted-foreground">Conversão de aulas agendadas (Total: {metrics?.siteViews ? ((metrics.totalCompleted / metrics.siteViews) * 100).toFixed(1) : "0.0"}%)</h3>
-                                <ResponsiveContainer width="100%" height="100%">
-                                    <RechartsBarChart
-                                        data={chartData}
-                                        margin={{ top: 5, right: 30, left: 10, bottom: 20 }}
-                                    >
-                                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                                        <XAxis dataKey="name" tick={{ fill: '#6b7280', fontSize: 13, fontWeight: "500" }} dy={10} axisLine={false} tickLine={false} />
-                                        <YAxis tick={{ fill: '#6b7280', fontWeight: "bold" }} axisLine={false} tickLine={false} />
-                                        <RechartsTooltip cursor={{ fill: '#f3f4f6' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)', fontWeight: "bold" }} />
-                                        <Bar dataKey="Visitas" radius={[6, 6, 0, 0]} barSize={50} fill="#cbd5e1" />
-                                        <Bar dataKey="Entraram" radius={[6, 6, 0, 0]} barSize={50} fill="#8b5cf6" />
-                                        <Bar dataKey="Confirmadas" radius={[6, 6, 0, 0]} barSize={50} fill="#22c55e" />
-                                        <Legend wrapperStyle={{ paddingTop: "20px" }} />
-                                    </RechartsBarChart>
-                                </ResponsiveContainer>
+                                <div className="flex-1 w-full pb-4">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <RechartsBarChart
+                                            data={chartData}
+                                            margin={{ top: 5, right: 30, left: 10, bottom: 20 }}
+                                        >
+                                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                            <XAxis dataKey="name" tick={{ fill: '#6b7280', fontSize: 13, fontWeight: "500" }} dy={10} axisLine={false} tickLine={false} />
+                                            <YAxis tick={{ fill: '#6b7280', fontWeight: "bold" }} axisLine={false} tickLine={false} />
+                                            <RechartsTooltip cursor={{ fill: '#f3f4f6' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)', fontWeight: "bold" }} />
+                                            <Bar dataKey="Visitas" radius={[6, 6, 0, 0]} barSize={50} fill="#A2A183" />
+                                            <Bar dataKey="Entraram" radius={[6, 6, 0, 0]} barSize={50} fill="#DFAC8D" />
+                                            <Bar dataKey="Confirmadas" radius={[6, 6, 0, 0]} barSize={50} fill="#C08332" />
+                                            <Legend wrapperStyle={{ paddingTop: "20px" }} />
+                                        </RechartsBarChart>
+                                    </ResponsiveContainer>
+                                </div>
                             </div>
                         </div>
                     )}
