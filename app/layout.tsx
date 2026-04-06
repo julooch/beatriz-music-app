@@ -7,7 +7,7 @@ import CookieConsent from '@/components/CookieConsent'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-    title: 'Beatriz Faina | Aulas de Canto e Música',
+    title: 'Bia Faina',
     description: 'Descubra sua verdadeira voz. Aulas de canto online e presenciais com metodologia personalizada.',
 }
 

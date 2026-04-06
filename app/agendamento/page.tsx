@@ -59,6 +59,24 @@ export default function Agendamento() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+
+        if (formData.name.trim().length < 8 || /\d/.test(formData.name)) {
+            alert("Por favor, insira um nome completo com no mínimo 8 caracteres e sem números.")
+            return
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(formData.email)) {
+            alert("Por favor, insira um e-mail válido.")
+            return
+        }
+
+        const phoneDigits = formData.phone.replace(/\D/g, '')
+        if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+            alert("Por favor, insira um número de celular/WhatsApp válido (com DDD).")
+            return
+        }
+
         setLoading(true)
 
         try {

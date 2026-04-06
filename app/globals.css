@@ -5,32 +5,32 @@
 @layer base {
   :root {
     --background: 34 20% 99%;
-    --foreground: 54 37% 30%;
+    --foreground: 155 47% 15%; /* #143829 - Dark green */
 
     --card: 0 0% 100%;
-    --card-foreground: 54 37% 30%;
+    --card-foreground: 155 47% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 54 37% 30%;
+    --popover-foreground: 155 47% 15%;
 
-    --primary: 34 59% 47%;
+    --primary: 145 36% 26%; /* #2B5B3F - Hunter green */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 23 56% 71%;
-    --secondary-foreground: 54 37% 30%;
+    --secondary: 34 82% 55%; /* #E9972D - Carrot orange */
+    --secondary-foreground: 155 47% 15%;
 
-    --muted: 58 14% 94%;
-    --muted-foreground: 58 14% 45%;
+    --muted: 145 14% 94%;
+    --muted-foreground: 155 14% 45%;
 
-    --accent: 20 51% 36%;
+    --accent: 19 76% 44%; /* #C4501B - Sinopia */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 12 71% 37%; /* #A0361B - Rufous */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 58 14% 85%;
-    --input: 58 14% 85%;
-    --ring: 34 59% 47%;
+    --border: 145 14% 85%;
+    --input: 145 14% 85%;
+    --ring: 145 36% 26%;
 
     --radius: 1.5rem;
   }

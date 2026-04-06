@@ -73,6 +73,20 @@ export default function AdminDashboard() {
         }
     }
 
+    const handleDeleteSchedule = async (id: string) => {
+        if (!confirm("Tem certeza que deseja excluir permanentemente este agendamento?")) return;
+        try {
+            await fetch("/api/admin", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id })
+            })
+            fetchData()
+        } catch (err) {
+            alert("Erro ao excluir agendamento.")
+        }
+    }
+
     const handleDeleteUserData = async (requestId: string) => {
         if (!confirm("Tem certeza que deseja excluir todos os dados deste usuário? Esta ação é irreversível.")) return;
         setProcessingDeletion(requestId)
@@ -177,7 +191,7 @@ export default function AdminDashboard() {
                             <p className="font-bold text-lg">Você tem {metrics.pendingSchedules} agendamento{metrics.pendingSchedules > 1 ? "s" : ""} pendente{metrics.pendingSchedules > 1 ? "s" : ""}</p>
                         </div>
                         <Button variant="secondary" size="sm" className="bg-white text-orange-600 hover:bg-orange-50" onClick={() => {
-                            window.scrollBy({ top: 800, behavior: 'smooth' });
+                            document.getElementById('schedules-section')?.scrollIntoView({ behavior: 'smooth' });
                         }}>
                             Revisar agora
                         </Button>
@@ -322,7 +336,7 @@ export default function AdminDashboard() {
                 </section>
 
                 {/* Schedules Section */}
-                <section>
+                <section id="schedules-section">
                     <div className="flex items-center gap-2 mb-6">
                         <Users className="h-6 w-6 text-primary" />
                         <h2 className="text-2xl font-bold">Solicitações de Agendamento</h2>
@@ -391,6 +405,16 @@ export default function AdminDashboard() {
                                         >
                                             <MessageCircle className="mr-2 h-4 w-4" /> Bate-papo (WhatsApp)
                                         </Button>
+                                        
+                                        {schedule.status === "REJECTED" && (
+                                            <Button
+                                                variant="outline"
+                                                onClick={() => handleDeleteSchedule(schedule.id)}
+                                                className="w-full text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 mt-2 font-medium shadow-sm"
+                                            >
+                                                <Trash2 className="mr-2 h-4 w-4" /> Excluir Agendamento
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             ))
