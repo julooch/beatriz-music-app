@@ -51,11 +51,36 @@ export default function Agendamento() {
         return () => window.removeEventListener("beforeunload", handleBeforeUnload)
     }, [success]) // eslint-disable-line
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-        if (errors[e.target.name]) {
-            setErrors({ ...errors, [e.target.name]: "" })
+    const validateField = (name: string, value: string) => {
+        if (name === "name") {
+            if (value.trim().length < 8 || /[\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value)) {
+                return "Insira um nome completo, sem números ou símbolos."
+            }
         }
+        if (name === "email") {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            if (!emailRegex.test(value)) {
+                return "Insira um e-mail válido."
+            }
+        }
+        if (name === "phone") {
+            const phoneDigits = value.replace(/\D/g, '')
+            if (phoneDigits.length > 0 && (phoneDigits.length < 10 || phoneDigits.length > 15)) {
+                return "Insira um número válido (com DDD)."
+            }
+        }
+        return ""
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target
+        
+        // Block numbers in name instantly via stripping, or just show error. Let's just show error.
+        setFormData({ ...formData, [name]: value })
+        
+        // Instant visual feedback
+        const error = validateField(name, value)
+        setErrors(prev => ({ ...prev, [name]: error }))
     }
 
     const handleNext = () => {
