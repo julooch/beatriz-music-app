@@ -53,9 +53,37 @@ export default function Agendamento() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
+        if (errors[e.target.name]) {
+            setErrors({ ...errors, [e.target.name]: "" })
+        }
     }
 
-    const handleNext = () => setStep(step + 1)
+    const handleNext = () => {
+        const newErrors: Record<string, string> = {}
+
+        if (formData.name.trim().length < 8 || /[\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(formData.name)) {
+            newErrors.name = "Insira um nome completo (mínimo 8 letras, sem números ou símbolos)."
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!emailRegex.test(formData.email)) {
+            newErrors.email = "Insira um e-mail válido."
+        }
+
+        const phoneDigits = formData.phone.replace(/\D/g, '')
+        if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+            newErrors.phone = "Insira um número válido com DDD."
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors)
+            return
+        }
+
+        setErrors({})
+        setStep(step + 1)
+    }
+    
     const handlePrev = () => setStep(step - 1)
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -63,7 +91,8 @@ export default function Agendamento() {
 
         const newErrors: Record<string, string> = {}
 
-        if (formData.name.trim().length < 8 || /\d/.test(formData.name)) {
+        // Validamos novamente o passo 1 por segurança
+        if (formData.name.trim().length < 8 || /[\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(formData.name)) {
             newErrors.name = "Insira um nome completo com no mínimo 8 caracteres e sem números."
         }
 
