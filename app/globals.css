@@ -13,24 +13,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 155 47% 15%;
 
-    --primary: 145 36% 26%; /* #2B5B3F - Hunter green */
+    --primary: 19 76% 44%; /* #C4501B - Sinopia / Terracotta */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 34 82% 55%; /* #E9972D - Carrot orange */
-    --secondary-foreground: 155 47% 15%;
+    --secondary: 145 36% 26%; /* #2B5B3F - Hunter green */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 145 14% 94%;
+    --muted: 34 30% 92%;
     --muted-foreground: 155 14% 45%;
 
-    --accent: 19 76% 44%; /* #C4501B - Sinopia */
+    --accent: 201 41% 29%; /* Muted Deep Teal/Blue from image */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 12 71% 37%; /* #A0361B - Rufous */
+    --destructive: 12 71% 37%; /* #A0361B - Rufous (for destructive actions but blending) */
     --destructive-foreground: 0 0% 100%;
 
     --border: 145 14% 85%;
     --input: 145 14% 85%;
-    --ring: 145 36% 26%;
+    --ring: 19 76% 44%;
 
     --radius: 1.5rem;
   }
