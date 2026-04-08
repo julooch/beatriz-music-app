@@ -220,7 +220,7 @@ export default function Agendamento() {
                                 {step === 2 && (
                                     <div className="space-y-4 animate-in fade-in flex-1">
                                         <div className="space-y-2">
-                                            <label htmlFor="date" className="text-sm font-medium">Data e Hora Preferida</label>
+                                            <label htmlFor="date" className="text-sm font-medium">Data e Hora Preferida <span className="text-red-500">*</span></label>
                                             <Input required type="datetime-local" id="date" name="date" value={formData.date} onChange={handleChange} />
                                         </div>
                                         <div className="space-y-2">
@@ -237,11 +237,11 @@ export default function Agendamento() {
                                             </div>
                                         )}
                                         <div className="space-y-2">
-                                            <label htmlFor="goal" className="text-sm font-medium">Qual seu objetivo com a aula?</label>
+                                            <label htmlFor="goal" className="text-sm font-medium">Qual seu objetivo com a aula? <span className="text-red-500">*</span></label>
                                             <Input required id="goal" name="goal" placeholder="Ex: Hobby, Profissional, Cantar na Igreja..." value={formData.goal} onChange={handleChange} />
                                         </div>
                                         <div className="space-y-2">
-                                            <label htmlFor="improvement" className="text-sm font-medium">O que você gostaria de aprimorar?</label>
+                                            <label htmlFor="improvement" className="text-sm font-medium">O que você gostaria de aprimorar? <span className="text-red-500">*</span></label>
                                             <Input required id="improvement" name="improvement" placeholder="Ex: Alcance Vocal, Respiração, Afinação" value={formData.improvement} onChange={handleChange} />
                                         </div>
 
