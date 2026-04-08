@@ -12,7 +12,6 @@ export default function Agendamento() {
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
 
-    // Form State
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -20,8 +19,10 @@ export default function Agendamento() {
         date: "",
         isBeginner: "true",
         goal: "",
-        improvement: ""
+        improvement: "",
+        pastExperience: ""
     })
+    const [errors, setErrors] = useState<Record<string, string>>({})
 
     // Generate a random session ID on load and track entrance
     useEffect(() => {
@@ -60,23 +61,29 @@ export default function Agendamento() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
+        const newErrors: Record<string, string> = {}
+
         if (formData.name.trim().length < 8 || /\d/.test(formData.name)) {
-            alert("Por favor, insira um nome completo com no mínimo 8 caracteres e sem números.")
-            return
+            newErrors.name = "Insira um nome completo com no mínimo 8 caracteres e sem números."
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if (!emailRegex.test(formData.email)) {
-            alert("Por favor, insira um e-mail válido.")
-            return
+            newErrors.email = "Insira um e-mail válido."
         }
 
         const phoneDigits = formData.phone.replace(/\D/g, '')
         if (phoneDigits.length < 10 || phoneDigits.length > 15) {
-            alert("Por favor, insira um número de celular/WhatsApp válido (com DDD).")
-            return
+            newErrors.phone = "Insira um número de celular/WhatsApp válido (com DDD)."
         }
 
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors)
+            setStep(1) // Return to step 1 to show errors if somehow submitted from step 2
+            return
+        }
+        
+        setErrors({})
         setLoading(true)
 
         try {
@@ -134,16 +141,19 @@ export default function Agendamento() {
                                 {step === 1 && (
                                     <div className="space-y-4 animate-in fade-in flex-1">
                                         <div className="space-y-2">
-                                            <label htmlFor="name" className="text-sm font-medium">Nome completo</label>
-                                            <Input required id="name" name="name" value={formData.name} onChange={handleChange} />
+                                            <label htmlFor="name" className="text-sm font-medium">Nome completo <span className="text-red-500">*</span></label>
+                                            <Input required id="name" name="name" value={formData.name} onChange={handleChange} className={errors.name ? "border-red-500 focus-visible:ring-red-500" : ""} />
+                                            {errors.name && <p className="text-red-500 text-xs font-semibold">{errors.name}</p>}
                                         </div>
                                         <div className="space-y-2">
-                                            <label htmlFor="email" className="text-sm font-medium">E-mail</label>
-                                            <Input required type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
+                                            <label htmlFor="email" className="text-sm font-medium">E-mail <span className="text-red-500">*</span></label>
+                                            <Input required type="email" id="email" name="email" value={formData.email} onChange={handleChange} className={errors.email ? "border-red-500 focus-visible:ring-red-500" : ""} />
+                                            {errors.email && <p className="text-red-500 text-xs font-semibold">{errors.email}</p>}
                                         </div>
                                         <div className="space-y-2">
-                                            <label htmlFor="phone" className="text-sm font-medium">Celular / WhatsApp</label>
-                                            <Input required type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+                                            <label htmlFor="phone" className="text-sm font-medium">Celular / WhatsApp <span className="text-red-500">*</span></label>
+                                            <Input required type="tel" id="phone" name="phone" placeholder="(11) 99999-9999" value={formData.phone} onChange={handleChange} className={errors.phone ? "border-red-500 focus-visible:ring-red-500" : ""} />
+                                            {errors.phone && <p className="text-red-500 text-xs font-semibold">{errors.phone}</p>}
                                         </div>
                                         <div className="pt-4 flex justify-end">
                                             <Button type="button" onClick={handleNext} disabled={!formData.name || !formData.email || !formData.phone}>
@@ -160,12 +170,18 @@ export default function Agendamento() {
                                             <Input required type="datetime-local" id="date" name="date" value={formData.date} onChange={handleChange} />
                                         </div>
                                         <div className="space-y-2">
-                                            <label htmlFor="isBeginner" className="text-sm font-medium">Você é iniciante no canto?</label>
+                                            <label htmlFor="isBeginner" className="text-sm font-medium">Você é iniciante no canto? <span className="text-red-500">*</span></label>
                                             <select id="isBeginner" name="isBeginner" value={formData.isBeginner} onChange={handleChange} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                                                <option value="true">Sim, estou começando agora</option>
-                                                <option value="false">Não, já tenho experiência</option>
+                                                <option value="true">sou iniciante</option>
+                                                <option value="false">não, tive algumas experiências</option>
                                             </select>
                                         </div>
+                                        {formData.isBeginner === "false" && (
+                                            <div className="space-y-2 animate-in fade-in slide-in-from-top-1">
+                                                <label htmlFor="pastExperience" className="text-sm font-medium">Quais foram suas experiências com canto? <span className="text-red-500">*</span></label>
+                                                <Input required id="pastExperience" name="pastExperience" value={formData.pastExperience} onChange={handleChange} />
+                                            </div>
+                                        )}
                                         <div className="space-y-2">
                                             <label htmlFor="goal" className="text-sm font-medium">Qual seu objetivo com a aula?</label>
                                             <Input required id="goal" name="goal" placeholder="Ex: Hobby, Profissional, Cantar na Igreja..." value={formData.goal} onChange={handleChange} />

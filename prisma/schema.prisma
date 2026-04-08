@@ -59,13 +59,14 @@ enum Status {
 }
 
 model ScheduleDetails {
-  id          String   @id @default(uuid())
-  scheduleId  String   @unique
-  schedule    Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
-  isBeginner  Boolean
-  goal        String
-  improvement String
-  createdAt   DateTime @default(now())
+  id             String   @id @default(uuid())
+  scheduleId     String   @unique
+  schedule       Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  isBeginner     Boolean
+  pastExperience String?
+  goal           String
+  improvement    String
+  createdAt      DateTime @default(now())
 }
 
 model EventLog {

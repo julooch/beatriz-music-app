@@ -373,6 +373,9 @@ export default function AdminDashboard() {
                                         {schedule.details && (
                                             <div className="text-sm text-muted-foreground mt-4 space-y-2 bg-primary/5 p-4 rounded-lg border border-primary/10">
                                                 <p><strong className="text-foreground">Nível Vocal:</strong> {schedule.details.isBeginner ? "Iniciante" : "Experiente"}</p>
+                                                {schedule.details.pastExperience && (
+                                                    <p><strong className="text-foreground">Experiência com canto:</strong> {schedule.details.pastExperience}</p>
+                                                )}
                                                 <p><strong className="text-foreground">Objetivo Principal:</strong> {schedule.details.goal}</p>
                                                 <p><strong className="text-foreground">O que quer melhorar:</strong> {schedule.details.improvement}</p>
                                             </div>

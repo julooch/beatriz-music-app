@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
         // Handle Schedule Creation
         if (action === "CREATE_SCHEDULE") {
-            const { email, name, phone, date, isBeginner, goal, improvement, sessionId } = payload
+            const { email, name, phone, date, isBeginner, pastExperience, goal, improvement, sessionId } = payload
 
             // 1. Create or Find User
             let user = await prisma.user.findUnique({
@@ -71,6 +71,7 @@ export async function POST(req: NextRequest) {
                     details: {
                         create: {
                             isBeginner,
+                            pastExperience: pastExperience || null,
                             goal,
                             improvement
                         }
